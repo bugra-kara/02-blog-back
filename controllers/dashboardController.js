@@ -22,9 +22,9 @@ const createPost = async (req,res) => {
         '${slug}',
         '${subTitle}',
         '${content}',
-        ARRAY${JSON.stringify(tags).replaceAll(`"`,`'`)},
+        ARRAY${(JSON.stringify(tags)).replaceAll(`"`,`'`)},
          ${author},
-        ARRAY${JSON.stringify(categories).replaceAll(`"`,`'`)},
+        ARRAY${(JSON.stringify(categories)).replaceAll(`"`,`'`)},
         '${status}'
         );    
         `);

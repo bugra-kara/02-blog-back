@@ -68,7 +68,7 @@ const getTags = async (req,res) => {
     const {page} = req.query
     if(page !== 'undefined') {
         try {
-            const resp = await queries(`SELECT * FROM tags WHERE status = '1' ORDER BY created_date ASC OFFSET ${5*(page)} LIMIT 5 `)
+            const resp = await queries(`SELECT * FROM tags WHERE status = '1' ORDER BY created_date ASC OFFSET ${5*(page)} LIMIT 5`)
             const total = await queries(`SELECT COUNT(*) AS NumberOfTags FROM tags WHERE status = '1'`)
             res.json({result: "success", data: resp.rows, totalTag: total.rows[0].numberoftags})
         } catch (error) {
