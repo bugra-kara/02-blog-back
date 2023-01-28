@@ -26,7 +26,7 @@ app.use(
 )
 app.use(helmet());
 app.use(cors({
-  origin: 'https://bugradev-blog.netlify.app',
+  origin: ['https://bugradev-blog.netlify.app', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(xss());
@@ -35,13 +35,17 @@ app.use(morgan('tiny'))
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(express.json());
 app.use(function(req, res, next) {
+  const allowedOrigins = ['https://bugradev-blog.netlify.app', 'http://localhost:3000'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+       res.setHeader('Access-Control-Allow-Origin', origin);
+  }
   res.header('Content-Type', 'application/json;charset=UTF-8')
   res.header('Access-Control-Allow-Credentials', true)
   res.header(
     'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin',
     'Origin, X-Requested-With, Content-Type, Accept'
   )
-  res.setHeader('Access-Control-Allow-Origin', 'https://bugradev-blog.netlify.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
