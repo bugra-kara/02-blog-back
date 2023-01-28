@@ -1,10 +1,10 @@
 const { Pool } = require("pg")
 const pool = async (query) => {
     const pool = new Pool({
-      user: "postgres",
+      user: "trumpet.db.elephantsql.com",
       host: "localhost",
-      database: "KB",
-      password: "Abk1512?",
+      database: "poxwxwcp",
+      password: "9xKLN6n0uBSjLd8moW0aczhYLjNE5J0B",
       port: 5432,
       connectionTimeoutMillis: 2000,
     })
