@@ -7,7 +7,7 @@ const queries = require('../db/queries')
 const comparePassword = require('../utils/comparePassword')
 
 const register = async (req, res) => {
-  const {email, password, username, first_name, last_name} = req.body
+  const {email, password, username, first_name, last_name, role, slug} = req.body
   if (!email, !password, !username) {
     res.json({result: "failed", msg: "Fill the all inputs!"})
   }
@@ -15,7 +15,7 @@ const register = async (req, res) => {
     try {
       const salt = await bcrypt.genSalt(10);
       const newPassword = await bcrypt.hash(password, salt);
-      const postRegister = await queries(`INSERT INTO users (username, first_name, last_name, email, password) VALUES ('${username}', '${first_name}', '${last_name}', '${email}', '${newPassword}')`)
+      const postRegister = await queries(`INSERT INTO users (username, first_name, last_name, email, password, role, slug) VALUES ('${username}', '${first_name}', '${last_name}', '${email}', '${newPassword}', '${role}', '${slug}')`)
       if(postRegister.severity === 'ERROR') {
         res.json({result: "failed", error:postRegister.detail})
       }
