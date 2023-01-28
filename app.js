@@ -26,7 +26,7 @@ app.use(
 )
 app.use(helmet());
 app.use(cors({
-  origin: 'https://bugradev-blog.netlify.app/',
+  origin: 'https://bugradev-blog.netlify.app',
   credentials: true
 }));
 app.use(xss());
@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
     'Access-Control-Allow-Headers', 'Access-Control-Allow-Origin',
     'Origin, X-Requested-With, Content-Type, Accept'
   )
-  res.setHeader('Access-Control-Allow-Origin', 'https://bugradev-blog.netlify.app/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://bugradev-blog.netlify.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
