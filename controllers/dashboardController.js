@@ -18,7 +18,7 @@ const createPost = async (req,res) => {
         const newTags = JSON.stringify(tags).replace(/"/g,`'`)
         const newCats = JSON.stringify(categories).replace(/"/g,`'`)
         const response = await queries(`
-        INSERT INTO posts (title, slug, subtitle, content, tags, author, categories, status, isheadline) 
+        INSERT INTO posts (title, slug, subtitle, content, tags, author, categories, status, is_headline) 
         VALUES (
         '${title}',
         '${slug}',
