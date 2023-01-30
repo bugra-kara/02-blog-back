@@ -6,19 +6,14 @@ const getPosts = async (req,res) => {
         const headline = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND is_headline = 'true' AND 'One Cikanlar' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
-        if(req.query === 'main') {
-            const lastNews = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
+        const lastNews = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND is_headline = 'false' AND 'One Cikanlar' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
         const bitcoin = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND 'Bitcoin' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
-        const otherNews = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
-        FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
-        INNER JOIN posts ON author = sub.id WHERE status = '1' AND 'One Cikanlar' != ANY(posts.categories) AND is_headline = 'false' ORDER BY created_date DESC LIMIT 5`)
+        
         res.json({result: "success", data: {headline: headline.rows, lastNews: lastNews.rows, bitcoin: bitcoin.rows, otherNews: otherNews.rows}})
-    }
-    res.json({result: "success", data: {headline: headline.rows}})
     } catch (error) {
         res.json({result: "failed", msg: error})
     }
