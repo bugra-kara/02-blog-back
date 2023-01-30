@@ -13,12 +13,12 @@ const getPostsDashboard = async (req,res) => {
     }
 }
 const createPost = async (req,res) => {
-    const { title, slug, subTitle, content, tags, author, categories, status } = req.body
+    const { title, slug, subTitle, content, tags, author, categories, status, isheadline } = req.body
     try {
         const newTags = JSON.stringify(tags).replace(/"/g,`'`)
         const newCats = JSON.stringify(categories).replace(/"/g,`'`)
         const response = await queries(`
-        INSERT INTO posts (title, slug, subtitle, content, tags, author, categories, status) 
+        INSERT INTO posts (title, slug, subtitle, content, tags, author, categories, status, isheadline) 
         VALUES (
         '${title}',
         '${slug}',
@@ -27,7 +27,8 @@ const createPost = async (req,res) => {
         ARRAY${newTags},
          ${author},
         ARRAY${newCats},
-        '${status}'
+        '${status}',
+        '${isheadline}'
         );    
         `);
         if(response?.rowCount > 0 && status === '1') {
