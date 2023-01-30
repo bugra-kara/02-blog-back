@@ -16,7 +16,7 @@ const pool = async (query) => {
       return error
     }
     finally {
-      client.release()
+      client.end()
     }
 }
 

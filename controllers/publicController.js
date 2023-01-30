@@ -1,16 +1,15 @@
-const client = require('../db/client')
 const queries = require('../db/queries')
 
 //Posts
 const getPosts = async (req,res) => {
     try {
-        const headline = await client(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
+        const headline = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND is_headline = 'true' AND 'One Cikanlar' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
-        const lastNews = await client(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
+        const lastNews = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND is_headline = 'false' AND 'One Cikanlar' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
-        const bitcoin = await client(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
+        const bitcoin = await queries(`SELECT post_uid, status, fullName, title, slug, categories, tags, created_date, image_url 
         FROM (SELECT CONCAT(first_name, ' ', last_name) as fullName, id FROM users) as sub 
         INNER JOIN posts ON author = sub.id WHERE status = '1' AND 'Bitcoin' = ANY(posts.categories) ORDER BY created_date DESC LIMIT 5`)
         
