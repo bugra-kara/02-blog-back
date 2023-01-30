@@ -5,8 +5,7 @@ const pool = async (query) => {
       host: "trumpet.db.elephantsql.com",
       database: "poxwxwcp",
       password: "9xKLN6n0uBSjLd8moW0aczhYLjNE5J0B",
-      port: 5432,
-      idleTimeoutMillis: 0
+      port: 5432
     })
     const client = await pool.connect()
     try {
