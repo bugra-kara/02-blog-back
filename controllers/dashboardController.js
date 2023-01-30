@@ -14,6 +14,7 @@ const getPostsDashboard = async (req,res) => {
 }
 const createPost = async (req,res) => {
     const { title, slug, subTitle, content, tags, author, categories, status, isheadline } = req.body
+    console.log(req.body);
     try {
         const newTags = JSON.stringify(tags).replace(/"/g,`'`)
         const newCats = JSON.stringify(categories).replace(/"/g,`'`)
@@ -31,6 +32,7 @@ const createPost = async (req,res) => {
         '${isheadline}'
         );    
         `);
+        console.log(response);
         if(response?.rowCount > 0 && status === '1') {
             res.json({result: "succes", msg: "İçerik başarıyla eklendi!"})
         }
