@@ -6,6 +6,8 @@ const pool = async (query) => {
       database: "poxwxwcp",
       password: "9xKLN6n0uBSjLd8moW0aczhYLjNE5J0B",
       port: 5432,
+      idleTimeoutMillis: 15000,
+      allowExitOnIdle: false
     })
     const client = await pool.connect()
     try {
